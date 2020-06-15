@@ -1,6 +1,9 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css' rel='stylesheet' />
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
@@ -29,6 +32,14 @@
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
+    <div id='map' style='width: 400px; height: 300px;'></div>
+    <script>
+      mapboxgl.accessToken = 'pk.eyJ1IjoidGR3ZWlzczE5NzgiLCJhIjoiY2tiZ3BzOTE0MTd6bzJ1bWU5bmQ4YTJ2NCJ9.VZj9MXgJwKB1ihiDC8N8EA';
+      var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/tdweiss1978/ckbgq0e33025w1it4mhtlukau/draft'
+      });
+    </script>
     <div id="root"></div>
     <!--
       This HTML file is a template.
