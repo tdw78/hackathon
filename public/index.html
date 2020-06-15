@@ -27,20 +27,116 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>Tim Weiss</title>
+    <style>
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%
+      }
+      .marker {
+        background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRbaG2bN2iarOzXh_AEIKuvIPh7Rn1Vec_e5PNtutHceB1eEfvBC1SGECulN5iYGLOAMSfcnPRW&usqp=CAc');
+        background-size: cover;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+      .mapbox-popup {
+        max-width: 200px;
+        font-family: Georgia;
+      }
+    </style>
   </head>
   <body>
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
-    <div id='map' style='width: 400px; height: 300px;'></div>
+
+
+    <div id='map' style='width: 1400px; height: 800px;'></div>
     <script>
       mapboxgl.accessToken = 'pk.eyJ1IjoidGR3ZWlzczE5NzgiLCJhIjoiY2tiZ3BzOTE0MTd6bzJ1bWU5bmQ4YTJ2NCJ9.VZj9MXgJwKB1ihiDC8N8EA';
       var map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/tdweiss1978/ckbgq0e33025w1it4mhtlukau/draft'
+      style: 'mapbox://styles/tdweiss1978/ckbgq0e33025w1it4mhtlukau/draft',
+      center: [-96, 37.8],
+      zoom: 3.5
       });
+
+      var geojson = {
+       type: "FeatureCollection",
+       features: [
+      {
+        type: "feature",
+        geometry: {
+          type: "Point",
+          coordinates: [-74.9722, 39.7920]
+       },
+       properties: {
+         title: "Pine Valley Golf Club",
+         description: "ranked: 1",
+      }
+    },
+    {
+        type: "feature",
+        geometry: {
+          type: "Point",
+          coordinates: [-82.0226, 33.5021]
+       },
+       properties: {
+         title: "Augusta National",
+         description: "ranked: 2",
+      }
+    },
+    {
+        type: "feature",
+        geometry: {
+          type: "Point",
+          coordinates: [-121.9741, 36.5802]
+       },
+       properties: {
+         title: "Cypress Point Club",
+         description: "ranked: 3",
+      }
+    },
+    {
+        type: "feature",
+        geometry: {
+          type: "Point",
+          coordinates: [-72.4397, 40.8940]
+       },
+       properties: {
+         title: "Shinnecock Hills G.C.",
+         description: "ranked: 4",
+      }
+    },
+    {
+        type: "feature",
+        geometry: {
+          type: "Point",
+          coordinates: [-79.8269, 40.5259]
+       },
+       properties: {
+         title: "Oakmont C.C.",
+         description: "ranked: 5",
+      }
+    }
+  ]
+};
+
+      geojson.features.forEach(function(marker){
+        var el = document.createElement('div');
+        el.className = "marker"
+
+        new mapboxgl.Marker(el)
+        .setLngLat(marker.geometry.coordinates) 
+        .setPopup(new mapboxgl.Popup({ offset: 25 })
+        .setHTML('<h3>' + marker.properties.title + '</h3><h4>' + marker.properties.description + '</h4>'))
+        .addTo(map);
+      });
+
     </script>
-    <div id="root"></div>
+
+
+    <!-- <div id="root"></div> -->
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

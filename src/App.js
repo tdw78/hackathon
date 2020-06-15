@@ -11,7 +11,7 @@ class App extends Component {
     return (
       <div className="App">
 
-        <h1>Welcome!!</h1>
+        {/* <p className="heading">Welcome!!</p> */}
 
       </div>
    
